@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :feedbacks, only: %i[new]
-  resources :images, only: %i[index create new show]
   root 'images#index'
+
+  resources :feedbacks, only: %i[new]
+  namespace :api do
+    resource :feedbacks, only: [:create]
+  end
+
+  resources :images, only: %i[index create new show]
 end
