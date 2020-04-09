@@ -11,3 +11,11 @@
     color: red;
   }
 }
+
+.image {
+  list-style: none;
+  img {
+    max-width: 400px;
+    margin: 5px;
+  }
+}

@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class ImageTest < ActiveSupport::TestCase
+  setup do
+    response_mock = stub(code: '200', content_type: 'image/png')
+    Net::HTTP.stubs(:get_response).returns(response_mock)
+  end
+
   test 'rejects a blank url' do
     image = Image.new(url: '   ')
     assert_not_predicate image, :valid?
@@ -37,9 +42,13 @@ class ImageTest < ActiveSupport::TestCase
   end
 
   test 'accepts a url which returns an image' do
-    response_mock = stub(code: '200', content_type: 'image/png')
-    Net::HTTP.expects(:get_response).returns(response_mock)
-    image = Image.new(url: 'https://foobar.com/foo.png')
+    image = Image.new(url: 'https://example.com/foo.png')
     assert_predicate image, :valid?
+  end
+
+  test 'newest_first lists images from newest to oldest' do
+    Image.create!(url: 'https://example.com/first.png', created_at: Time.now - 1.day)
+    newest = Image.create!(url: 'https://example.com/second.png', created_at: Time.now)
+    assert_equal newest, Image.newest_first.first
   end
 end
