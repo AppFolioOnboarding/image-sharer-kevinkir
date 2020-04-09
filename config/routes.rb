@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  resources :images, only: %i[create new show]
-  root 'welcome#index'
+  resources :images, only: %i[index create new show]
+  root 'images#index'
 end

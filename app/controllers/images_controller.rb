@@ -22,6 +22,8 @@ class ImagesController < ApplicationController
     redirect_to root_url
   end
 
+  def index; end
+
   private
 
   def image_params
