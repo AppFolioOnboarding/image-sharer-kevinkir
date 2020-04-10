@@ -24,6 +24,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  # Useful for debugging (pause execution with `require 'pry'; binding.pry`)
+  gem 'pry'
 end
 
 group :development do
@@ -42,6 +44,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'mocha'
   gem 'selenium-webdriver'
 end
 
