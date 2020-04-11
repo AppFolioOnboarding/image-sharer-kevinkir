@@ -12,10 +12,27 @@
   }
 }
 
-.image {
-  list-style: none;
-  img {
-    max-width: 400px;
+.image-list-item {
+  list-style-type: none;
+  .image-wrapper {
+    border-style: solid;
+    border-width: 1px;
+    max-width: 402px;
     margin: 5px;
+    img {
+      max-width: 400px;
+    }
+    .tag-list {
+      list-style-type: none;
+      padding-left: 5px;
+      margin: 2px;
+      li {
+        display: inline-block;
+        background-color: #627bec;
+        color: white;
+        padding: 0 5px;
+        margin: 1px;
+      }
+    }
   }
 }

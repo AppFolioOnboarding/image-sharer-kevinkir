@@ -4,11 +4,22 @@
 </h1>
 <%= link_to 'add an image', new_image_path %>
 <% if Image.any? %>
-  <ol class="image-list">
+  <ol>
   <% Image.newest_first.all.each do |image| %>
-    <li class="image">
-      <%= link_to image_tag(image.url), image_path(image) %>
-    </li>
+    <li class="image-list-item">
+      <div class="image-wrapper">
+        <%= link_to image_tag(image.url), image_path(image) %>
+        <% unless image.tag_list.empty? %>
+          <div>
+            <ul class="tag-list">
+              <% image.tag_list.each do |tag| %>
+                <li><%= tag %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        </div>
+      </li>
   <% end %>
   </ol>
-<% end %>
+<%end%>
