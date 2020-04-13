@@ -9,15 +9,7 @@
     <li class="image-list-item">
       <div class="image-wrapper">
         <%= link_to image_tag(image.url), image_path(image) %>
-        <% unless image.tag_list.empty? %>
-          <div>
-            <ul class="tag-list">
-              <% image.tag_list.each do |tag| %>
-                <li><%= tag %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+        <%= render 'tag_list', image: image %>
         </div>
       </li>
   <% end %>

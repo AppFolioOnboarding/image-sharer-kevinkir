@@ -1,7 +1,2 @@
 <%= image_tag(@image.url) %>
-<h2>Tags</h2>
-<ul>
-<% @image.tag_list.each do |tag| %>
-  <li><%= tag %></li>
-<% end %>
-</ul>
+<%= render 'tag_list', image: @image %>

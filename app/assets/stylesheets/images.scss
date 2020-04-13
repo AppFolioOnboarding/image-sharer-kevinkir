@@ -22,17 +22,18 @@
     img {
       max-width: 400px;
     }
-    .tag-list {
-      list-style-type: none;
-      padding-left: 5px;
-      margin: 2px;
-      li {
-        display: inline-block;
-        background-color: #627bec;
-        color: white;
-        padding: 0 5px;
-        margin: 1px;
-      }
-    }
+  }
+}
+
+.tag-list {
+  list-style-type: none;
+  padding-left: 5px;
+  margin: 2px;
+  li {
+    display: inline-block;
+    background-color: #627bec;
+    color: white;
+    padding: 0 5px;
+    margin: 1px;
   }
 }

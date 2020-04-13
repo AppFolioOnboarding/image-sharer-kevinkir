@@ -103,7 +103,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test "should show the image's tags" do
     image = Image.create!(url: 'http://images.com/image.png', tag_list: 'foo,bar')
     get image_url(image)
-    assert_select 'li' do |elements|
+    assert_select '.tag-list li' do |elements|
       assert_equal %w[foo bar], elements.map(&:text)
     end
   end
