@@ -110,6 +110,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get image_url(image)
     assert_response :success
     assert_select 'img[src=?]', url
+    assert_select '.delete-image-link[href=?]', image_path(image)
   end
 
   test 'should redirect to root if the image does not exist' do
@@ -130,5 +131,22 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     image = Image.create!(url: 'http://images.com/image.png')
     get image_url(image)
     assert_select '.tag-list', count: 0
+  end
+
+  test 'should delete an image' do
+    image = Image.create!(url: 'http://images.com/image.png')
+    assert_difference 'Image.count', -1 do
+      delete image_url(image)
+    end
+    assert_redirected_to root_url
+    assert_equal I18n.t(:image_deleted), flash[:success]
+  end
+
+  test 'should display an error when deleting a non-existent image' do
+    assert_no_difference 'Image.count' do
+      delete image_url(id: -1)
+    end
+    assert_redirected_to root_url
+    assert_equal I18n.t(:image_not_found), flash[:danger]
   end
 end
