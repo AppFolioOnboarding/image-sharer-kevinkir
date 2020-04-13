@@ -22,7 +22,9 @@ class ImagesController < ApplicationController
     redirect_to root_url
   end
 
-  def index; end
+  def index
+    @images = params[:tag] ? Image.tagged_with(params[:tag]) : Image.all
+  end
 
   private
 
