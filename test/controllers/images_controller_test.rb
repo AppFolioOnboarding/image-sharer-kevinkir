@@ -12,7 +12,6 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     newest = Image.create!(url: 'http://images.com/newest.png', created_at: Time.now)
 
     get images_url
-    assert_select 'a[href=?]', new_image_path
     assert_select 'li img', count: 2 do |elements|
       assert_equal newest.url, elements.first.attribute('src').value
       assert_equal oldest.url, elements[1].attribute('src').value
