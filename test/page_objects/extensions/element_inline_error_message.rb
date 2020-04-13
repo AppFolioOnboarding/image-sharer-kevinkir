@@ -5,7 +5,7 @@ module PageObjects
         parent = find_parent
 
         Capybara.using_wait_time(0) do
-          parent.find('.help-block').text
+          parent.find('.invalid-feedback').text
         rescue Capybara::ElementNotFound
           ''
         end

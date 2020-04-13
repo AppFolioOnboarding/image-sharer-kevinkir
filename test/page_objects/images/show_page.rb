@@ -4,25 +4,25 @@ module PageObjects
       path :image
 
       def image_url
-        # TODO
+        node.find('img')[:src]
       end
 
       def tags
-        # TODO
+        node.find_all('.image-tag').map(&:text)
       end
 
       def delete
-        # TODO
+        node.find('.js-delete-image-link').click
         yield node.driver.browser.switch_to.alert
       end
 
       def delete_and_confirm!
-        # TODO
+        delete(&:accept)
         window.change_to(IndexPage)
       end
 
       def go_back_to_index!
-        # TODO
+        IndexPage.visit
       end
     end
   end

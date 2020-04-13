@@ -1,3 +1,4 @@
 <%= image_tag(@image.url) %>
 <%= render 'tag_list', image: @image %>
-<%= link_to 'delete image', image_path(@image), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'delete image', image_path(@image), method: :delete, class: 'js-delete-image-link',
+  data: { confirm: 'Are you sure?' } %>

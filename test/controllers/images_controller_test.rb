@@ -34,7 +34,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not display a list of images if there are none' do
     get images_url
-    assert_select '.image-list', count: 0
+    assert_select '.js-image-list', count: 0
     assert_select '.js-no-images-message', 'No images have been added'
   end
 
@@ -52,7 +52,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should display no images if the tag query parameter does not match any images' do
     Image.create!(url: 'http://images.com/image1.png', tag_list: 'foo, bar')
     get images_url(tag: 'bim')
-    assert_select '.image-list', count: 0
+    assert_select '.js-image-list', count: 0
     assert_select '.js-no-images-message', "There are no images tagged with 'bim'"
   end
 
@@ -110,7 +110,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get image_url(image)
     assert_response :success
     assert_select 'img[src=?]', url
-    assert_select '.delete-image-link[href=?]', image_path(image)
+    assert_select '.js-delete-image-link[href=?]', image_path(image)
   end
 
   test 'should redirect to root if the image does not exist' do

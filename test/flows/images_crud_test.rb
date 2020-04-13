@@ -11,13 +11,11 @@ class ImagesCrudTest < FlowTestCase
       url: 'invalid',
       tags: tags.join(', ')
     ).as_a(PageObjects::Images::NewPage)
-    assert_equal 'must be a valid URL', new_image_page.url.error_message
+    assert_equal 'Url must be http or https', new_image_page.url.error_message
 
     image_url = 'https://media3.giphy.com/media/EldfH1VJdbrwY/200.gif'
-    new_image_page.url.set(image_url)
-
-    image_show_page = new_image_page.create_image!
-    assert_equal 'You have successfully added an image.', image_show_page.flash_message(:success)
+    image_show_page = new_image_page.create_image!(url: image_url)
+    assert_equal 'Image created', image_show_page.flash_message(:success)
 
     assert_equal image_url, image_show_page.image_url
     assert_equal tags, image_show_page.tags

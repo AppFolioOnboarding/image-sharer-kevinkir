@@ -3,23 +3,27 @@ module PageObjects
     class IndexPage < PageObjects::Document
       path :images
 
-      collection :images, locator: '#TODO', item_locator: '#TODO', contains: ImageCard do
+      collection :images, locator: '.js-image-list', item_locator: '.image-list-item', contains: ImageCard do
         def view!
-          # TODO
+          url = node.find('img')[:src]
+          image = Image.find_by!(url: url)
+          ShowPage.visit(image.id)
         end
       end
 
       def add_new_image!
-        node.click_on('New Image')
+        node.click_on('add an image')
         window.change_to(NewPage)
       end
 
       def showing_image?(url:, tags: nil)
-        # TODO
+        images.any? do |elem|
+          elem.url == url && (tags.nil? || elem.tags == tags)
+        end
       end
 
       def clear_tag_filter!
-        # TODO
+        IndexPage.visit
       end
     end
   end
