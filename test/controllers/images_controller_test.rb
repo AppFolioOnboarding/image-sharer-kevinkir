@@ -60,8 +60,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get new_image_url
     assert_response :success
     assert_select '.form-control', count: 2
-    assert_select 'label', 'Url'
-    assert_select 'label', 'Tag list'
+    assert_select '#image_url'
+    assert_select '#image_tag_list'
   end
 
   test 'should redirect to the image on create success' do

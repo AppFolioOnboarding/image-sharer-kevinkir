@@ -18,6 +18,8 @@ gem 'jquery-rails'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'acts-as-taggable-on', '~> 6.0'
 
+gem 'simple_form'
+
 gem 'webpacker', '~> 4'
 
 group :development, :test do
