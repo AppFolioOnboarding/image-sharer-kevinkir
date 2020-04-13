@@ -1,6 +1,29 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
+  test 'should get index' do
+    get images_url
+    assert_response :success
+    assert_select 'a[href=?]', new_image_path
+  end
+
+  test 'should show images on the index' do
+    oldest = Image.create!(url: 'http://images.com/oldest.png', created_at: Time.now - 1.day)
+    newest = Image.create!(url: 'http://images.com/newest.png', created_at: Time.now)
+
+    get images_url
+    assert_select 'a[href=?]', new_image_path
+    assert_select 'li img', count: 2 do |elements|
+      assert_equal newest.url, elements.first.attribute('src').value
+      assert_equal oldest.url, elements[1].attribute('src').value
+    end
+  end
+
+  test 'should not display a list of images if there are none' do
+    get images_url
+    assert_select '.image-list', count: 0
+  end
+
   test 'should get new' do
     get new_image_url
     assert_response :success

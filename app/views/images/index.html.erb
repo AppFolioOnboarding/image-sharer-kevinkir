@@ -1,0 +1,14 @@
+<h1>
+  <%= image_tag('camera.svg', alt: 'camera icon', width: 50) %>
+  Kevin's Image Sharer
+</h1>
+<%= link_to 'add an image', new_image_path %>
+<% if Image.any? %>
+  <ol class="image-list">
+  <% Image.newest_first.all.each do |image| %>
+    <li class="image">
+      <%= link_to image_tag(image.url), image_path(image) %>
+    </li>
+  <% end %>
+  </ol>
+<% end %>
