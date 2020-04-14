@@ -12,6 +12,10 @@
   }
 }
 
+.clear-filter-link {
+  display: block;
+}
+
 .image-list-item {
   list-style-type: none;
   .image-wrapper {
@@ -31,9 +35,15 @@
   margin: 2px;
   li {
     display: inline-block;
-    background-color: #627bec;
-    color: white;
-    padding: 0 5px;
-    margin: 1px;
+    a {
+      background-color: #6b84f7;
+      color: white;
+      padding: 0 5px;
+      margin: 1px;
+      &:hover {
+        background-color: #3a5ae7;
+        text-decoration: none;
+      }
+    }
   }
 }

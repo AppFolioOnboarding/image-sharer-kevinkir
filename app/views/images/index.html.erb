@@ -2,10 +2,18 @@
   <%= image_tag('camera.svg', alt: 'camera icon', width: 50) %>
   Kevin's Image Sharer
 </h1>
+<% if params[:tag] %>
+  <div>
+    <h2>Filter</h2>
+    tag: <%= params[:tag] %>
+    <%= link_to 'clear filter', images_path, class: 'clear-filter-link' %>
+  </div>
+<% end %>
+<h2>Images</h2>
 <%= link_to 'add an image', new_image_path %>
-<% if Image.any? %>
+<% if @images.any? %>
   <ol>
-  <% Image.newest_first.all.each do |image| %>
+  <% @images.newest_first.all.each do |image| %>
     <li class="image-list-item">
       <div class="image-wrapper">
         <%= link_to image_tag(image.url), image_path(image) %>
@@ -14,4 +22,8 @@
       </li>
   <% end %>
   </ol>
+<% else %>
+  <p class="js-no-images-message">
+    <%= params[:tag] ? "There are no images tagged with '#{params[:tag]}'" : 'No images have been added'%>
+  </p>
 <%end%>
