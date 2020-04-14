@@ -46,6 +46,16 @@ class ImageTest < ActiveSupport::TestCase
     assert_predicate image, :valid?
   end
 
+  test 'can be created with tags' do
+    image = Image.create!(url: 'https://example.com/foo.png', tag_list: 'foo, bar')
+    assert_equal %w[foo bar], image.tag_list
+  end
+
+  test 'tag_list defaults to an empty array if created without tags' do
+    image = Image.create!(url: 'https://example.com/foo.png')
+    assert_predicate image.tag_list, :empty?
+  end
+
   test 'newest_first lists images from newest to oldest' do
     Image.create!(url: 'https://example.com/first.png', created_at: Time.now - 1.day)
     newest = Image.create!(url: 'https://example.com/second.png', created_at: Time.now)

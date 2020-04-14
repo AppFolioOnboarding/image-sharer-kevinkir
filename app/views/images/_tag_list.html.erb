@@ -1,0 +1,9 @@
+<% unless image.tag_list.empty? %>
+  <div>
+    <ul class="tag-list">
+    <% image.tag_list.each do |tag| %>
+      <li><%= tag %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
