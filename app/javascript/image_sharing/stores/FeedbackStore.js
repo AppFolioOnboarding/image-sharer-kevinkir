@@ -1,3 +1,3 @@
-export default class FeedbackStore {
+export class FeedbackStore {
   /* Implement your feedback store*/
 }
