@@ -1,16 +1,7 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer
-    style={{
-      bottom: 0,
-      fontSize: '10px',
-      paddingBottom: 4,
-      position: 'fixed',
-      textAlign: 'center',
-      width: '100%',
-    }}
-  >
+  <footer className="text-center mt-2" style={{ fontSize: '10px' }} >
     Copyright: AppFolio Inc. Onboarding
   </footer>
 );

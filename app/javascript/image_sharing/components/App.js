@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import { inject } from 'mobx-react';
+import React from 'react';
+import { Col, Container, Row } from 'reactstrap';
 import Footer from './Footer';
+import FeedbackForm from './FeedbackForm';
+import Header from './Header';
 
-class App extends Component {
-  /* Add Prop Types check*/
-  render() {
-    return (
-      <div>
+const App = () => (
+  <Container>
+    <Row className="mt-5">
+      <Col>
+        <Header title="Tell us what you think" />
+        <FeedbackForm />
         <Footer />
-      </div>
-    );
-  }
-}
+      </Col>
+    </Row>
+  </Container>
+);
 
-export default inject('stores')(App);
+export default App;
