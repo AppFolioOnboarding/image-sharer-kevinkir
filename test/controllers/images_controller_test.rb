@@ -34,7 +34,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not display a list of images if there are none' do
     get images_url
-    assert_select '.image-list', count: 0
+    assert_select '.js-image-list', count: 0
     assert_select '.js-no-images-message', 'No images have been added'
   end
 
@@ -52,7 +52,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should display no images if the tag query parameter does not match any images' do
     Image.create!(url: 'http://images.com/image1.png', tag_list: 'foo, bar')
     get images_url(tag: 'bim')
-    assert_select '.image-list', count: 0
+    assert_select '.js-image-list', count: 0
     assert_select '.js-no-images-message', "There are no images tagged with 'bim'"
   end
 
@@ -60,8 +60,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get new_image_url
     assert_response :success
     assert_select '.form-control', count: 2
-    assert_select 'label', 'Url'
-    assert_select 'label', 'Tag list'
+    assert_select '#image_url'
+    assert_select '#image_tag_list'
   end
 
   test 'should redirect to the image on create success' do
@@ -110,6 +110,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get image_url(image)
     assert_response :success
     assert_select 'img[src=?]', url
+    assert_select '.js-delete-image-link[href=?]', image_path(image)
   end
 
   test 'should redirect to root if the image does not exist' do
@@ -130,5 +131,22 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     image = Image.create!(url: 'http://images.com/image.png')
     get image_url(image)
     assert_select '.tag-list', count: 0
+  end
+
+  test 'should delete an image' do
+    image = Image.create!(url: 'http://images.com/image.png')
+    assert_difference 'Image.count', -1 do
+      delete image_url(image)
+    end
+    assert_redirected_to root_url
+    assert_equal I18n.t(:image_deleted), flash[:success]
+  end
+
+  test 'should display an error when deleting a non-existent image' do
+    assert_no_difference 'Image.count' do
+      delete image_url(id: -1)
+    end
+    assert_redirected_to root_url
+    assert_equal I18n.t(:image_not_found), flash[:danger]
   end
 end

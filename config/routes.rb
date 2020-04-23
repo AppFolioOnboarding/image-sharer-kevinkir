@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     resource :feedbacks, only: [:create]
   end
 
-  resources :images, only: %i[index create new show]
+  resources :images, only: %i[index create new show destroy]
 end

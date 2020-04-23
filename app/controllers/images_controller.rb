@@ -26,6 +26,17 @@ class ImagesController < ApplicationController
     @images = params[:tag] ? Image.tagged_with(params[:tag]) : Image.all
   end
 
+  def destroy
+    @image = Image.find_by(id: params[:id])
+    if @image.nil?
+      flash[:danger] = I18n.t(:image_not_found)
+    else
+      @image.destroy
+      flash[:success] = I18n.t(:image_deleted)
+    end
+    redirect_to root_url
+  end
+
   private
 
   def image_params

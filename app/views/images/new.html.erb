@@ -1,20 +1,6 @@
 <h1>Add an image</h1>
-<%= form_with(model: @image, local: true) do |form| %>
-  <% if @image.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @image.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= form.label :url %><br>
-  <%= form.text_field :url, class: 'form-control' %>
-
-  <%= form.label :tag_list %><br>
-  <%= form.text_field :tag_list, value: form.object.tag_list.join(', '), class: 'form-control' %>
-  
-  <%= form.submit %>
+<%= simple_form_for @image do |f| %>
+  <%= f.input :url %>
+  <%= f.input :tag_list, input_html: { value: f.object.tag_list.join(', ') } %>
+  <%= f.button :submit %>
 <% end %>

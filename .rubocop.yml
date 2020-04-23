@@ -6,6 +6,7 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'bin/*'
+    - 'config/initializers/*'
   TargetRubyVersion: 2.5
 
 Layout/IndentFirstArrayElement:

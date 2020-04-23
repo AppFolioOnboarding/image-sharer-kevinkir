@@ -18,6 +18,8 @@ gem 'jquery-rails'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'acts-as-taggable-on', '~> 6.0'
 
+gem 'simple_form'
+
 gem 'webpacker', '~> 4'
 
 group :development, :test do
@@ -44,6 +46,7 @@ group :production do
 end
 
 group :test do
+  gem 'ae_page_objects'
   gem 'capybara'
   gem 'mocha'
   gem 'selenium-webdriver'

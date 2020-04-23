@@ -12,7 +12,7 @@
 <h2>Images</h2>
 <%= link_to 'add an image', new_image_path %>
 <% if @images.any? %>
-  <ol>
+  <ol class="js-image-list">
   <% @images.newest_first.all.each do |image| %>
     <li class="image-list-item">
       <div class="image-wrapper">
