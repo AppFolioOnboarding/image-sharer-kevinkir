@@ -1,6 +1,5 @@
-// Uncomment when needed.
-// import { post } from '../utils/helper';
+import { post } from '../utils/helper';
 
-export default class PostFeedbackService {
-  /* Implement your service */
+export function postFeedback(username, comments) {
+  return post('/api/feedbacks', { username, comments });
 }

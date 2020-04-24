@@ -8,7 +8,7 @@ const FeedbackForm = observer(() => {
   return (
     <Form onSubmit={(e) => {
       e.preventDefault();
-      // TODO
+      feedbackStore.submitFeedback();
     }}
     >
       <FormGroup>
