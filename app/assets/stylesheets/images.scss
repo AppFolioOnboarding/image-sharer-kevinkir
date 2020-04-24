@@ -1,49 +1,20 @@
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 0 30px 0;
-  }
-}
-
 .field_with_errors {
   .form-control {
     color: red;
   }
 }
 
-.clear-filter-link {
-  display: block;
+.js-tag-filter-badge {
+  font-size: 100% !important;
+  font-weight: normal !important;
 }
 
-.image-list-item {
-  list-style-type: none;
-  .image-wrapper {
-    border-style: solid;
-    border-width: 1px;
-    max-width: 402px;
-    margin: 5px;
-    img {
-      max-width: 400px;
-    }
-  }
+.js-image-list-item img {
+  max-width: 400px;
 }
 
-.tag-list {
-  list-style-type: none;
-  padding-left: 5px;
-  margin: 2px;
-  li {
-    display: inline-block;
-    a {
-      background-color: #6b84f7;
-      color: white;
-      padding: 0 5px;
-      margin: 1px;
-      &:hover {
-        background-color: #3a5ae7;
-        text-decoration: none;
-      }
-    }
+@media (max-width: 482px) {
+  .js-image-list-item img {
+    max-width: 100%;
   }
 }

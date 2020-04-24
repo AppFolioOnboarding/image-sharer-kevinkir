@@ -8,7 +8,7 @@ module PageObjects
       end
 
       def tags
-        node.find_all('.image-tag').map(&:text)
+        node.find_all('.js-image-tag').map(&:text)
       end
 
       def delete

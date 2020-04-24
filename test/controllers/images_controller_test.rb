@@ -21,7 +21,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should show tags on the index' do
     Image.create!(url: 'http://images.com/image.png', tag_list: 'foo,bar')
     get images_url
-    assert_select '.image-tag' do |elements|
+    assert_select '.js-image-tag' do |elements|
       assert_equal %w[foo bar], elements.map(&:text)
     end
   end
@@ -29,7 +29,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should not show tags on the index for images which have no tags' do
     Image.create!(url: 'http://images.com/image.png')
     get images_url
-    assert_select '.tag-list', count: 0
+    assert_select '.js-tag-list', count: 0
   end
 
   test 'should not display a list of images if there are none' do
@@ -46,7 +46,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get images_url(tag: 'foo')
 
     assert_select 'li img', count: 2
-    assert_select '.clear-filter-link[href=?]', images_path
+    assert_select '.js-clear-filter-link[href=?]', images_path
   end
 
   test 'should display no images if the tag query parameter does not match any images' do
@@ -122,7 +122,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test "should show the image's tags" do
     image = Image.create!(url: 'http://images.com/image.png', tag_list: 'foo,bar')
     get image_url(image)
-    assert_select '.image-tag' do |elements|
+    assert_select '.js-image-tag' do |elements|
       assert_equal %w[foo bar], elements.map(&:text)
     end
   end
@@ -130,7 +130,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should not show tags for the image if there are none' do
     image = Image.create!(url: 'http://images.com/image.png')
     get image_url(image)
-    assert_select '.tag-list', count: 0
+    assert_select '.js-tag-list', count: 0
   end
 
   test 'should delete an image' do
