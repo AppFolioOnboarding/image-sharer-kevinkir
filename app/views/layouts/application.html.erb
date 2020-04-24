@@ -18,6 +18,7 @@
       <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
     <header>
+      <%= link_to 'Feedback', new_feedback_path, class: 'btn btn-primary float-right' %>
       <h1 class="text-center">
         <%= link_to root_path do %>
           <%= image_tag('camera.svg', alt: 'camera icon', width: 50) %>
