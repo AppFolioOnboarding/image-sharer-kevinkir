@@ -4,7 +4,7 @@ module PageObjects
       path :image
 
       def image_url
-        node.find('img')[:src]
+        node.find('.js-image')[:src]
       end
 
       def tags
