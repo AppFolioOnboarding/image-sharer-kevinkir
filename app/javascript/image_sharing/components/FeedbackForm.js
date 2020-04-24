@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 import { observer } from 'mobx-react';
 import { useStores } from '../hooks/use-stores';
 
@@ -17,7 +17,9 @@ const FeedbackForm = observer(() => {
           id="username"
           value={feedbackStore.username}
           onChange={e => feedbackStore.setUsername(e.target.value)}
+          invalid={!!feedbackStore.errors.username}
         />
+        <FormFeedback className="js-username-error">{feedbackStore.errors.username}</FormFeedback>
       </FormGroup>
       <FormGroup>
         <Label for="comments">Comments:</Label>
@@ -26,7 +28,9 @@ const FeedbackForm = observer(() => {
           type="textarea"
           value={feedbackStore.comments}
           onChange={e => feedbackStore.setComments(e.target.value)}
+          invalid={!!feedbackStore.errors.comments}
         />
+        <FormFeedback className="js-comments-error">{feedbackStore.errors.comments}</FormFeedback>
       </FormGroup>
       <Button type="submit" color="primary">Submit</Button>
     </Form>

@@ -23,3 +23,4 @@ en:
   image_created: 'Image created'
   image_not_found: 'Image not found'
   image_deleted: 'You have successfully deleted the image.'
+  feedback_successful: 'Thank you for your feedback!'

@@ -3,10 +3,11 @@ module Api
     def create
       feedback = Feedback.new(feedback_params)
       if feedback.save
+        flash[:success] = I18n.t(:feedback_successful)
         render status: :created, json: {
           data: {
             type: 'feedback',
-            id: feedback.id,
+            id: feedback.id.to_s,
             attributes: {
               username: feedback.username,
               comments: feedback.comments
