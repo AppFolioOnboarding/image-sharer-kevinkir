@@ -6,7 +6,7 @@ import { useStores } from '../hooks/use-stores';
 const FeedbackForm = observer(() => {
   const { feedbackStore } = useStores();
   return (
-    <Form onSubmit={(e) => {
+    <Form className="js-feedback-form" onSubmit={(e) => {
       e.preventDefault();
       feedbackStore.submitFeedback();
     }}

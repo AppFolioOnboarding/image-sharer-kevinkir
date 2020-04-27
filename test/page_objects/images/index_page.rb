@@ -11,6 +11,10 @@ module PageObjects
         end
       end
 
+      def flash(category)
+        node.find(".alert.alert-#{category}").text
+      end
+
       def add_new_image!
         node.click_on('add an image')
         window.change_to(NewPage)
