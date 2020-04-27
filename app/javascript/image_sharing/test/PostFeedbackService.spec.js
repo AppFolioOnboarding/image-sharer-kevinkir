@@ -37,14 +37,9 @@ describe('PostFeedbackService', () => {
       const expectedError = new Error('expected errror');
       postStub.rejects(expectedError);
 
-      return postFeedback('user', 'comment').then(
-        () => {
-          expect.fail('postFeedback unexpectedly resolved');
-        },
-        (error) => {
-          expect(error).to.equal(expectedError);
-        }
-      );
+      const responsePromise = postFeedback('user', 'comment');
+
+      return expect(responsePromise).to.eventually.be.rejectedWith(expectedError);
     });
   });
 });

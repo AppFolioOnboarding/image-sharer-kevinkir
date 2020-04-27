@@ -1,10 +1,14 @@
 /* eslint import/no-extraneous-dependencies: 1 */
 
 import 'jsdom-global/register';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import Adapter from 'enzyme-adapter-react-16/build/index';
 import { configure } from 'enzyme';
 
 configure({ adapter: new Adapter() });
+
+chai.use(chaiAsPromised);
 
 //
 // Throw exceptions on unhandled promise rejections to prevent tests
