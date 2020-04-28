@@ -1,9 +1,9 @@
 <% unless image.tag_list.empty? %>
   <div>
-    <ul class="tag-list">
+    <ul class="js-tag-list list-group list-group-horizontal">
     <% image.tag_list.each do |tag| %>
-      <li>
-        <%= link_to tag, images_path(tag: tag), class: 'image-tag' %>
+      <li class="list-group-item border-0 p-0 pr-1 pt-1">
+        <%= link_to tag, images_path(tag: tag), class: 'js-image-tag btn btn-info' %>
       </li>
     <% end %>
     </ul>

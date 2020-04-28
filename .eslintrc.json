@@ -10,5 +10,13 @@
     "import/resolver": {
       "webpack": {}
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": "*.spec.js",
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
 }

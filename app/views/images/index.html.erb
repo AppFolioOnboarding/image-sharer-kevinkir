@@ -1,29 +1,33 @@
-<h1>
-  <%= image_tag('camera.svg', alt: 'camera icon', width: 50) %>
-  Kevin's Image Sharer
-</h1>
-<% if params[:tag] %>
-  <div>
-    <h2>Filter</h2>
-    tag: <%= params[:tag] %>
-    <%= link_to 'clear filter', images_path, class: 'clear-filter-link' %>
-  </div>
-<% end %>
-<h2>Images</h2>
-<%= link_to 'add an image', new_image_path %>
-<% if @images.any? %>
-  <ol class="js-image-list">
-  <% @images.newest_first.all.each do |image| %>
-    <li class="image-list-item">
-      <div class="image-wrapper">
-        <%= link_to image_tag(image.url), image_path(image) %>
-        <%= render 'tag_list', image: image %>
-        </div>
-      </li>
+<div class="container">
+  <% if params[:tag] %>
+    <div>
+      <h2>Filter</h2>
+      <span class="js-tag-filter-badge badge badge-info text-white p-2">
+        <span><%= params[:tag] %></span>
+        <%= link_to(images_path, class: 'js-clear-filter-link text-white h6', 'aria-label' => 'clear filter') do %>
+          <span aria-hidden="true">&times;</span>
+        <% end %>
+      </span>
+    </div>
   <% end %>
-  </ol>
-<% else %>
-  <p class="js-no-images-message">
-    <%= params[:tag] ? "There are no images tagged with '#{params[:tag]}'" : 'No images have been added'%>
-  </p>
-<%end%>
+  <div class="row">
+    <div class="col">
+      <h2>Images</h2>
+      <%= link_to 'add an image', new_image_path, class: 'btn btn-primary' %>
+      <% if @images.any? %>
+        <ol class="js-image-list list-group">
+        <% @images.newest_first.all.each do |image| %>
+          <li class="js-image-list-item list-group-item">
+            <%= link_to image_tag(image.url), image_path(image) %>
+            <%= render 'tag_list', image: image %>
+          </li>
+        <% end %>
+        </ol>
+      <% else %>
+        <p class="js-no-images-message">
+          <%= params[:tag] ? "There are no images tagged with '#{params[:tag]}'" : 'No images have been added'%>
+        </p>
+      <%end%>
+    </div>
+  </div>
+</div>

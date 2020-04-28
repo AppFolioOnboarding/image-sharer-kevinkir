@@ -24,6 +24,16 @@ describe('FeedbackForm', () => {
     sinon.restore();
   });
 
+  it('should submit the feedback on form submission', () => {
+    const preventDefault = sinon.spy();
+    const wrapper = shallow(<FeedbackForm />);
+
+    wrapper.simulate('submit', { preventDefault });
+
+    sinon.assert.calledOnce(stubbedFeedbackStore.submitFeedback);
+    sinon.assert.calledOnce(preventDefault);
+  });
+
   describe('username input', () => {
     it('should get its value from the feedback store', () => {
       stubbedFeedbackStore.username = 'foo';
@@ -39,6 +49,23 @@ describe('FeedbackForm', () => {
         target: { value: 'new-username' },
       });
       sinon.assert.calledWith(stubbedFeedbackStore.setUsername, 'new-username');
+    });
+
+    it('should not render any errors prior to submission', () => {
+      const wrapper = shallow(<FeedbackForm />);
+      const usernameElement = wrapper.find('#username');
+      expect(usernameElement.prop('invalid')).to.be.false;
+    });
+
+    it('should render errors', () => {
+      stubbedFeedbackStore.errors.username = 'not valid';
+      const wrapper = shallow(<FeedbackForm />);
+
+      const usernameElement = wrapper.find('#username');
+      expect(usernameElement.prop('invalid')).to.be.true;
+
+      const usernameErrorElement = wrapper.find('.js-username-error');
+      expect(usernameErrorElement.render().text()).to.equal(stubbedFeedbackStore.errors.username);
     });
   });
 
@@ -57,6 +84,23 @@ describe('FeedbackForm', () => {
         target: { value: 'some comment' },
       });
       sinon.assert.calledWith(stubbedFeedbackStore.setComments, 'some comment');
+    });
+
+    it('should not render any errors prior to submission', () => {
+      const wrapper = shallow(<FeedbackForm />);
+      const commentsElement = wrapper.find('#comments');
+      expect(commentsElement.prop('invalid')).to.be.false;
+    });
+
+    it('should render errors', () => {
+      stubbedFeedbackStore.errors.comments = 'not valid';
+      const wrapper = shallow(<FeedbackForm />);
+
+      const commentsElement = wrapper.find('#comments');
+      expect(commentsElement.prop('invalid')).to.be.true;
+
+      const commentsErrorElement = wrapper.find('.js-comments-error');
+      expect(commentsErrorElement.render().text()).to.equal(stubbedFeedbackStore.errors.comments);
     });
   });
 });

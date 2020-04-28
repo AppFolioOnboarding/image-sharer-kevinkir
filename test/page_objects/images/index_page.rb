@@ -3,12 +3,16 @@ module PageObjects
     class IndexPage < PageObjects::Document
       path :images
 
-      collection :images, locator: '.js-image-list', item_locator: '.image-list-item', contains: ImageCard do
+      collection :images, locator: '.js-image-list', item_locator: '.js-image-list-item', contains: ImageCard do
         def view!
           url = node.find('img')[:src]
           image = Image.find_by!(url: url)
           ShowPage.visit(image.id)
         end
+      end
+
+      def flash(category)
+        node.find(".alert.alert-#{category}").text
       end
 
       def add_new_image!
